@@ -9,10 +9,10 @@ const ProductsMenu = () => {
   return (
     <>
       <div className="products-container">
-        {products?.map((product: any, index: number) => {
+        {products?.map((product: any) => {
           return (
             <>
-              <ProductCard key={product.id + index} product={product} />
+              <ProductCard key={product.id} product={product} />
             </>
           );
         })}
