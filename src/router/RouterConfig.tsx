@@ -10,6 +10,7 @@ import Shop from "./routes/shop/Shop";
 import { UserProvider } from "../context/user/user";
 import { ProductsProvider } from "../context/products/product";
 import { CartProvider } from "../context/cart/Cart";
+import Checkout from "./routes/checkout/Checkout";
 
 const RouterConfig = () => {
   return (
@@ -26,6 +27,7 @@ const RouterConfig = () => {
                 <Route index element={<Home />} />
                 <Route path="shop" element={<Shop />} />
                 <Route path="auth" element={<AuthenticationRoute />} />
+                <Route path="checkout" element={<Checkout />} />
               </Route>
             </Routes>
           </CartProvider>
