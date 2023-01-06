@@ -8,7 +8,7 @@
 // import { getRedirectResult } from "firebase/auth";
 import SignUp from "../sign-up/SignUp";
 import SignIn from "../sign-in/SignIn";
-import "./Authentication.scss";
+import { AuthenticationContainer } from "./AuthenticationStyles";
 
 const Authentication = () => {
   // useEffect(() => {
@@ -40,10 +40,10 @@ const Authentication = () => {
     <>
       {/* <button onClick={logGoogleUser}>Sign in with Google</button>
       <button>Sign in with Google Redirect</button> */}
-      <div className="authentication-container">
+      <AuthenticationContainer>
         <SignIn />
         <SignUp />
-      </div>
+      </AuthenticationContainer>
     </>
   );
 };

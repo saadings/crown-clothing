@@ -9,11 +9,11 @@ export const BUTTON_TYPES_CLASSES: any = {
 const getButtonStyles: any = (
   buttonType: string = BUTTON_TYPES_CLASSES.base
 ) => {
-  ({
+  return {
     [BUTTON_TYPES_CLASSES.base]: BaseButton,
     [BUTTON_TYPES_CLASSES.google]: GoogleSignInButton,
     [BUTTON_TYPES_CLASSES.inverted]: InvertedButton,
-  }[buttonType]);
+  }[buttonType];
 };
 
 const Button = ({ children, buttonType, ...props }: any) => {
