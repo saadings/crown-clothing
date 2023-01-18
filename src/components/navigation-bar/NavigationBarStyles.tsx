@@ -9,7 +9,7 @@ export const NavigationContainer: any = styled.div`
   margin-bottom: 25px;
   position: sticky;
   top: 0px;
-  z-index: 100;
+  z-index: 1;
   background-color: white;
 `;
 

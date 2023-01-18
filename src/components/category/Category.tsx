@@ -1,12 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CategoriesContext } from "../../context/categories/Categories";
+import { useSelector } from "react-redux";
+
+import { selectCategoriesMap } from "../../store/categories/category-selector";
 import ProductCard from "../product-card/ProductCard";
 import "./Category.scss";
 
 const Category = () => {
   const { category }: any = useParams();
-  const { categoriesMap }: any = useContext(CategoriesContext);
+
+  const categoriesMap: any = useSelector(selectCategoriesMap);
+
+  // const { categoriesMap }: any = useContext(CategoriesContext);
   // * We can use the bellow syntax but will happen every time component re-renders
   // const product = categoriesMap[category];
 

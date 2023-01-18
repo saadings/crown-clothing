@@ -44,23 +44,25 @@ export const addCollectionAndDocuments = async (
   // console.log("done");
 };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, "categories");
+export const getCategoriesAndDocuments = async (collectionName: string) => {
+  const collectionRef = collection(db, collectionName);
 
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot?.docs?.reduce(
-    (acc: any, docSnapshot: any) => {
-      const { title, items } = docSnapshot.data();
+  return querySnapshot?.docs.map((docSnapshot) => docSnapshot.data()); // give back categories
 
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
+  //   .reduce(
+  //   (acc: any, docSnapshot: any) => {
+  //     const { title, items } = docSnapshot.data();
 
-  return categoryMap;
+  //     acc[title.toLowerCase()] = items;
+  //     return acc;
+  //   },
+  //   {}
+  // );
+
+  // return categoryMap;
 };
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -79,7 +81,7 @@ const firebaseConfig: any = {
 
 // Initialize Firebase
 // ? CRUD operation will be done using firebaseApp
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 // ? Creates instance of provider
 // ? Used the new keyword as we need multiple providers

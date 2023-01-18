@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
@@ -6,6 +7,9 @@ import {
 import Button, { BUTTON_TYPES_CLASSES } from "../button/Button";
 import FormInput from "../form-input/FormInput";
 import "./SignIn.scss";
+
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user-selector";
 
 const defaultFormFields = {
   displayName: "",
@@ -15,11 +19,15 @@ const defaultFormFields = {
 };
 
 const SignIn = () => {
+  const currentUser = useSelector(selectCurrentUser);
+
   const [formFields, setFormFields] = useState<any>(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
+    navigate("/");
   };
 
   const handleChange = (event: any) => {
@@ -51,6 +59,10 @@ const SignIn = () => {
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
+
+    if (await currentUser) {
+      navigate("/");
+    }
   };
 
   return (

@@ -1,21 +1,22 @@
+import { useSelector } from "react-redux";
 import {
   NavigationContainer,
   LogoContainer,
   NavLinks,
   NavLink,
 } from "./NavigationBarStyles";
-import { Link } from "react-router-dom";
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
-import { useContext } from "react";
-import { UserContext } from "../../context/user/user";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
-import { CartContext } from "../../context/cart/Cart";
+import { selectCurrentUser } from "../../store/user/user-selector";
+import { selectIsCartOpen } from "../../store/cart/cart-selectors";
 
 const NavigationBar = () => {
-  const { currentUser }: any = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser);
+
+  const isCartOpen = useSelector(selectIsCartOpen);
+
   const handleSignOut = async () => {
     await signOutUser();
     // setCurrentUser(null);
