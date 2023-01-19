@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "reselect": "^4.1.7",
     "sass": "^1.57.1",
     "styled-components": "^5.3.6",
@@ -51,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.26"
   }
