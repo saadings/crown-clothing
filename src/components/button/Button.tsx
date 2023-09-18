@@ -16,11 +16,13 @@ const getButtonStyles: any = (
   }[buttonType];
 };
 
-const Button = ({ children, buttonType, ...props }: any) => {
+const Button = ({ children, buttonType, isLoading, ...props }: any) => {
   const CustomButton = getButtonStyles(buttonType);
   return (
     <>
-      <CustomButton {...props}>{children}</CustomButton>
+      <CustomButton disabled={isLoading} {...props}>
+        {children}
+      </CustomButton>
     </>
   );
 };
