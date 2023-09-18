@@ -5,6 +5,7 @@ import {
 } from "../../store/cart/cart-selectors";
 import CheckoutPageItem from "../checkout-page-item/CheckoutPageItem";
 import "./CheckoutPage.scss";
+import PaymentForm from "../payment-form/PaymentForm";
 
 const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
@@ -40,6 +41,7 @@ const CheckoutPage = () => {
           );
         })}
         <span className="total">Total: ${cartTotal}</span>
+        <PaymentForm />
       </div>
     </>
   );
