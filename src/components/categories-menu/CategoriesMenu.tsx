@@ -1,4 +1,4 @@
-import CategoryItem from "../category-item/category-item";
+import CategoryItem from "../category-item/CategoryItem";
 import "./categories-menu.scss";
 
 const categories = [
