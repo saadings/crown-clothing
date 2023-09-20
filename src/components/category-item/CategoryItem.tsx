@@ -3,7 +3,7 @@ import {
   BackgroundImage,
   BodyContainer,
   DirectoryItemContainer,
-} from "./CategoryItemStyles";
+} from "./categoryItemStyles";
 
 const CategoryItem = ({ category }: any) => {
   const { imageUrl, title, route } = category;
