@@ -1,4 +1,4 @@
-import CategoriesMenu from "../../../components/categories-menu/categories-menu";
+import CategoriesMenu from "../../../components/categories-menu/CategoriesMenu";
 // import { Outlet } from "react-router-dom";
 const Home = () => {
   return (
