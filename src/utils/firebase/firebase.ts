@@ -22,20 +22,24 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
+import { Category } from "../../store/categories/category-types";
+
+type ObjectToAdd = {
+  title: string;
+};
 
 // ! For uploading data in a batch to Firebase
-export const addCollectionAndDocuments = async (
-  collectionKey: any,
-  objectsToAdd: any,
-  field: string = "title"
-) => {
+export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
+  collectionKey: string,
+  objectsToAdd: T[]
+): Promise<void> => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
   // * Attach different CRUD operations to batch
 
   objectsToAdd.forEach((object: any) => {
-    const docRef = doc(collectionRef, object[field].toLowerCase());
+    const docRef = doc(collectionRef, object.title.toLowerCase());
 
     batch.set(docRef, object);
   });
@@ -44,25 +48,15 @@ export const addCollectionAndDocuments = async (
   // console.log("done");
 };
 
-export const getCategoriesAndDocuments = async (collectionName: string) => {
-  const collectionRef = collection(db, collectionName);
+export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
+  const collectionRef = collection(db, "categories");
 
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
 
-  return querySnapshot?.docs.map((docSnapshot) => docSnapshot.data()); // give back categories
-
-  //   .reduce(
-  //   (acc: any, docSnapshot: any) => {
-  //     const { title, items } = docSnapshot.data();
-
-  //     acc[title.toLowerCase()] = items;
-  //     return acc;
-  //   },
-  //   {}
-  // );
-
-  // return categoryMap;
+  return querySnapshot.docs.map(
+    (docSnapshot) => docSnapshot.data() as Category
+  ); // give back categories
 };
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -93,12 +87,15 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
 export const createUserDocumentFromAuth = async (
   userAuth: any,
   additionalInformation: any = {}

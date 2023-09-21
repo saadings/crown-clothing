@@ -1,28 +1,38 @@
-import { CATEGORIES_ACTIONS_TYPES } from "./category-types";
-import { createAction } from "./../../utils/reducer/reducer";
-// import { getCategoriesAndDocuments } from "../../utils/firebase/firebase";
+import { CATEGORIES_ACTIONS_TYPES, Category } from "./category-types";
+import {
+  createAction,
+  Action,
+  ActionWithPayload,
+  withMatcher,
+} from "./../../utils/reducer/reducer";
 
-export const setCategories = (categoriesArray: any) =>
-  createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES, categoriesArray);
+export type FetchCategoriesStart =
+  Action<CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_START>;
 
-export const fetchCategoriesStart = () =>
-  createAction(CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_START, {});
+export type FetchCategoriesSuccess = ActionWithPayload<
+  CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_SUCCESS,
+  Category[]
+>;
 
-export const fetchCategoriesSuccess = (categoriesArray: any) =>
-  createAction(
-    CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_SUCCESS,
-    categoriesArray
-  );
+export type FetchCategoriesFailure = ActionWithPayload<
+  CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_FAILURE,
+  Error
+>;
 
-export const fetchCategoriesFailure = (error: any) =>
-  createAction(CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_FAILURE, error);
+export const fetchCategoriesStart = withMatcher(
+  (): FetchCategoriesStart =>
+    createAction(CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_START)
+);
 
-// export const fetchCategoriesAsync: any = () => async (dispatch: any) => {
-//   dispatch(fetchCategoriesStart());
-//   try {
-//     const categoriesArray = await getCategoriesAndDocuments("categories");
-//     dispatch(fetchCategoriesSuccess(categoriesArray));
-//   } catch (error) {
-//     dispatch(fetchCategoriesFailure(error));
-//   }
-// };
+export const fetchCategoriesSuccess = withMatcher(
+  (categoriesArray: Category[]): FetchCategoriesSuccess =>
+    createAction(
+      CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_SUCCESS,
+      categoriesArray
+    )
+);
+
+export const fetchCategoriesFailure = withMatcher(
+  (error: Error): FetchCategoriesFailure =>
+    createAction(CATEGORIES_ACTIONS_TYPES.FETCH_CATEGORIES_FAILURE, error)
+);
