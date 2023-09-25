@@ -6,8 +6,9 @@ import {
 import CheckoutPageItem from "../checkout-page-item/CheckoutPageItem";
 import "./CheckoutPage.scss";
 import PaymentForm from "../payment-form/PaymentForm";
+import { memo } from "react";
 
-const CheckoutPage = () => {
+const CheckoutPage = memo(() => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
 
@@ -45,6 +46,6 @@ const CheckoutPage = () => {
       </div>
     </>
   );
-};
+});
 
 export default CheckoutPage;
