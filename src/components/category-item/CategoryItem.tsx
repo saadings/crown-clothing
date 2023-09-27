@@ -13,7 +13,7 @@ const CategoryItem = ({ category }: any) => {
 
   return (
     <DirectoryItemContainer onClick={onNavigateHandler}>
-      <BackgroundImage imageUrl={imageUrl} />
+      <BackgroundImage $imageUrl={imageUrl} />
       <BodyContainer>
         <h2>{title.toUpperCase()}</h2>
         <p>Shop Now</p>
